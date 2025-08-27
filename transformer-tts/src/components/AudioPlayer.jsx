@@ -10,9 +10,10 @@ const AudioPlayer = ({ audioUrl, mimeType }) => {
   useEffect(() => {
     if (audioPlayer.current && audioSource.current) {
       audioSource.current.src = audioUrl;
-      audioPlayer.current.play();
+      audioPlayer.current.load();
     }
   }, [audioUrl])
+  
   return (
     <div className="flex relative z-10 my-4 w-full">
       <audio
@@ -22,7 +23,8 @@ const AudioPlayer = ({ audioUrl, mimeType }) => {
               shadow-xl shadow-black/5 ring-1 ring-slate-700/10"
       >
         {/* 浏览器兼容声音的类型不一样 多个source */}
-        <source ref={audioSource} type={mimeType} />
+        <source ref={audioSource} src={audioUrl} type={mimeType} />
+        Your browser does not support the audio element.
       </audio>
     </div>
   )
